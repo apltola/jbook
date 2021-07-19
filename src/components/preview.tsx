@@ -1,6 +1,5 @@
 import './preview.css';
-import { useEffect } from 'react';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 
 interface PreviewProps {
   code: string;
@@ -9,23 +8,23 @@ interface PreviewProps {
 const html = `
     <html>
       <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <style>html { background-color: white; }</style>
       </head>
       <body>
         <div id="root"></div>
         <script>
+          const handleError = (err) => {
+            const root = document.querySelector('#root');
+            root.innerHTML = '<div style="color: red;"><h4>Runtime Error</h4>' + err + '</div>';
+            console.error(err);
+          };
           window.addEventListener('message', (event) => {
             try {
-              eval(event.data)
+              eval(event.data);
             } catch (err) {
-              document.querySelector('#root').innerHTML = '<div><h4>Runtime error!</h4>' + err + '</div>'
-              document.querySelector('#root').style = "color: orange";
-              console.error(err);
+              handleError(err);
             }
-          }, false)
+          }, false);
         </script>
       </body>
     </html>
@@ -35,19 +34,15 @@ const Preview: React.FC<PreviewProps> = ({ code }) => {
   const iframe = useRef<any>();
 
   useEffect(() => {
-    iframe.current.srcDoc = html;
-    iframe.current.contentWindow.postMessage(code, '*');
+    iframe.current.srcdoc = html;
+    setTimeout(() => {
+      iframe.current.contentWindow.postMessage(code, '*');
+    }, 50);
   }, [code]);
 
   return (
     <div className="preview-wrapper">
-      <iframe
-        className="preview-frame"
-        ref={iframe}
-        srcDoc={html}
-        title="preview"
-        sandbox="allow-scripts"
-      />
+      <iframe title="preview" ref={iframe} sandbox="allow-scripts" srcDoc={html} />
     </div>
   );
 };
