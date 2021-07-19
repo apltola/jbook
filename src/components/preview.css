@@ -2,7 +2,6 @@
   flex-grow: 1;
   position: relative;
   height: 100%;
-  border: 2px solid green;
   display: flex;
   flex-direction: row;
 }
@@ -19,7 +18,7 @@
 
 .preview-frame {
   height: 100%;
+  width: 100px;
   flex-grow: 1;
   background-color: white;
-  border: 1px solid red;
 }
