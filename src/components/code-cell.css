@@ -1,0 +1,6 @@
+.cell-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid goldenrod;
+}

@@ -1,0 +1,25 @@
+.preview-wrapper {
+  flex-grow: 1;
+  position: relative;
+  height: 100%;
+  border: 2px solid green;
+  display: flex;
+  flex-direction: row;
+}
+
+.react-draggable-transparent-selection .preview-wrapper:after {
+  content: "";
+  position:absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.preview-frame {
+  height: 100%;
+  flex-grow: 1;
+  background-color: white;
+  border: 1px solid red;
+}
