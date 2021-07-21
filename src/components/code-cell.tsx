@@ -1,7 +1,7 @@
 import './code-cell.css';
 import { useState, useEffect } from 'react';
 import CodeEditor from './code-editor';
-import Preview from './preview';
+import Preview from './code-preview';
 import bundle from '../bundler';
 import Resizable from './resizable';
 
